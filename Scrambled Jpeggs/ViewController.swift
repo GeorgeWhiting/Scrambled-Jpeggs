@@ -39,8 +39,9 @@ class ViewController: UIViewController {
             for _ in 0..<4 {
                 let blockFrame : CGRect = CGRect(x: 0, y: 0, width: blockWidth, height: blockWidth)
                 let block: MyBlock = MyBlock (frame: blockFrame)
-                
                 let thisCenter : CGPoint = CGPoint(x: xCenter, y: yCenter)
+                
+                block.isUserInteractionEnabled = true
                 
                 block.center = thisCenter
                 block.originalCenter = thisCenter
