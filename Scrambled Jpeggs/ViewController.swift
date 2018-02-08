@@ -60,6 +60,11 @@ class ViewController: UIViewController {
             xCenter = blockWidth / 2
             yCenter = yCenter + blockWidth
         }
+        
+        let finalBlock : MyBlock = blockArray[15] as! MyBlock
+        finalBlock.removeFromSuperview()
+        blockArray.removeObject(at: 15)
+        
     }
 
 
