@@ -12,10 +12,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        makeBlocks()
     }
-
     
+    
+    func makeBlocks() -> String {
+        return "true"
+    }
 
 
 }
