@@ -1,24 +1,21 @@
-//
-//  ViewController.swift
-//  Scrambled Jpeggs
-//
-//  Created by george whiting on 08/02/2018.
-//  Copyright © 2018 george whiting. All rights reserved.
-//
-
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var gameView: UIView!
+    
+    @IBOutlet weak var timerLabel: UILabel!
+    
+    @IBAction func ResetButton(_ sender: Any) {
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    
 
 
 }
