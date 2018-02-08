@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     var yCenter : CGFloat!
     
     var blockArray: NSMutableArray = []
+    var centersArray: NSMutableArray = []
     
     
     override func viewDidLoad() {
@@ -26,6 +27,7 @@ class ViewController: UIViewController {
     
     func makeBlocks() {
         blockArray = []
+        centersArray = []
         
         gameViewWidth = gameView.frame.size.width
         blockWidth = gameViewWidth / 4
@@ -43,6 +45,7 @@ class ViewController: UIViewController {
                 blockArray.add(block)
                 
                 xCenter = xCenter + blockWidth
+                centersArray.add(block.center)
             }
             xCenter = blockWidth / 2
             yCenter = yCenter + blockWidth
