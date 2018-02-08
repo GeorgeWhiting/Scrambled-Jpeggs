@@ -38,14 +38,17 @@ class ViewController: UIViewController {
         for _ in 0..<4 {
             for _ in 0..<4 {
                 let blockFrame : CGRect = CGRect(x: 0, y: 0, width: blockWidth, height: blockWidth)
-                let block: UIImageView = UIImageView (frame: blockFrame)
+                let block: MyBlock = MyBlock (frame: blockFrame)
                 
-                block.center = CGPoint(x: xCenter, y: yCenter)
+                let thisCenter : CGPoint = CGPoint(x: xCenter, y: yCenter)
+                
+                block.center = thisCenter
+                block.originalCenter = thisCenter
                 gameView.addSubview(block)
                 blockArray.add(block)
                 
                 xCenter = xCenter + blockWidth
-                centersArray.add(block.center)
+                centersArray.add(thisCenter)
             }
             xCenter = blockWidth / 2
             yCenter = yCenter + blockWidth
@@ -53,5 +56,8 @@ class ViewController: UIViewController {
     }
 
 
+}
+class MyBlock : UIImageView {
+    var originalCenter: CGPoint!
 }
 
