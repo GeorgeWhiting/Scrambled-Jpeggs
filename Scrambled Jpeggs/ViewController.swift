@@ -41,7 +41,11 @@ class ViewController: UIViewController {
                 block.center = CGPoint(x: xCenter, y: yCenter)
                 gameView.addSubview(block)
                 blockArray.add(block)
+                
+                xCenter = xCenter + blockWidth
             }
+            xCenter = blockWidth / 2
+            yCenter = yCenter + blockWidth
         }
     }
 
