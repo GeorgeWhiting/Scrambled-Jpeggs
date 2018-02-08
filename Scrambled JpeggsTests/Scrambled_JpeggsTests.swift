@@ -1,36 +1,21 @@
-//
-//  Scrambled_JpeggsTests.swift
-//  Scrambled JpeggsTests
-//
-//  Created by george whiting on 08/02/2018.
-//  Copyright © 2018 george whiting. All rights reserved.
-//
-
 import XCTest
+import UIKit
 @testable import Scrambled_Jpeggs
 
 class Scrambled_JpeggsTests: XCTestCase {
+    var game: ViewController!
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        game = storyboard.instantiateViewController(withIdentifier: "Main") as! ViewController
+        let _ = game.view
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        game = nil
         super.tearDown()
     }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+   
     
 }
