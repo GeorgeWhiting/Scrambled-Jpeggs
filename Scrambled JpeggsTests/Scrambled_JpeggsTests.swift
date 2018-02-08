@@ -22,4 +22,10 @@ class Scrambled_JpeggsTests: XCTestCase {
         game.makeBlocks()
         XCTAssertEqual(game.blockArray.count, 16)
     }
+    
+    func testBlock1CenterPoint() {
+        game.makeBlocks()
+        XCTAssertEqual((game.blockArray[0] as! UIImageView).center, CGPoint(x: game.blockWidth/2, y: game.blockWidth/2))
+        XCTAssertNotEqual((game.blockArray[0] as! UIImageView).center, CGPoint(x: game.blockWidth/3, y: game.blockWidth/3))
+    }
 }
