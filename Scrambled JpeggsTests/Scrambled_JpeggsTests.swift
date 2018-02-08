@@ -17,8 +17,9 @@ class Scrambled_JpeggsTests: XCTestCase {
         super.tearDown()
     }
    
-    func testMakeBlocks() {
-        XCTAssertEqual(game.makeBlocks(), "true")
-    }
     
+    func testMakeBlocks() {
+        game.makeBlocks()
+        XCTAssertEqual(game.blockArray.count, 16)
+    }
 }
