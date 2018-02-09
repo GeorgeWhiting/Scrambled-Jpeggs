@@ -131,6 +131,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
+    func checkBlocks() -> Bool {
+        var correctBlockCounter = 0
+        
+        for i in 0..<15 {
+            if (blockArray[i] as! MyBlock).center == (blockArray[i] as! MyBlock).originalCenter {
+               correctBlockCounter += 1
+            }
+        }
+        if correctBlockCounter == 15 {
+            return true
+        }
+        return false
+    }
+    
     var newPic: Bool?
     
     @IBAction func uploadImageTaped(_ sender: Any) {

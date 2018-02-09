@@ -92,6 +92,17 @@ class Scrambled_JpeggsTests: XCTestCase {
         
         XCTAssertEqual(game.blockArray.count, 0)
     }
+    
+    func testCheckAllTilesInRightPlace() {
+        game.makeBlocks()
+        XCTAssertTrue(game.checkBlocks())
+    }
+    
+    func testTilesInWrongPlace() {
+        game.makeBlocks()
+        game.scramble()
+        XCTAssertFalse(game.checkBlocks())
+    }
 
 }
 
