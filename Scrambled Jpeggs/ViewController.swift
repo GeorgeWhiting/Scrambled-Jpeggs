@@ -7,9 +7,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBOutlet weak var timerLabel: UILabel!
     
-    @IBAction func ResetButton(_ sender: Any) {
-    }
-    
     var gameViewWidth : CGFloat!
     var blockWidth : CGFloat!
     
@@ -22,13 +19,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var picNum : Int = 0
     
     var empty: CGPoint!
+    
+    @IBAction func ResetButton(_ sender: Any) {
+        scramble()
+        
+    }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         images = [#imageLiteral(resourceName: "Image1"), #imageLiteral(resourceName: "Image2"), #imageLiteral(resourceName: "Image3"), #imageLiteral(resourceName: "Image4"), #imageLiteral(resourceName: "Image5"), #imageLiteral(resourceName: "Image6"), #imageLiteral(resourceName: "Image7"), #imageLiteral(resourceName: "Image8"), #imageLiteral(resourceName: "Image9"), #imageLiteral(resourceName: "Image10"), #imageLiteral(resourceName: "Image11"), #imageLiteral(resourceName: "Image12"), #imageLiteral(resourceName: "Image13"), #imageLiteral(resourceName: "Image14"), #imageLiteral(resourceName: "Image15"), #imageLiteral(resourceName: "Image16")]
         makeBlocks()
-        scramble()
+//        scramble()
+        self.ResetButton(Any.self)
     }
     
     
