@@ -98,9 +98,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         if (blockArray.contains(myTouch.view as Any))        {
             
             let touchView: MyBlock = (myTouch.view)! as! MyBlock
-            print("-------")
-            print(empty.x)
-            print(touchView)
             
             let xOffset: CGFloat = touchView.center.x - empty.x
             let yOffset: CGFloat = touchView.center.y - empty.y
@@ -116,15 +113,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 touchView.center = empty
                 UIView.commitAnimations()
                 
-//                if (touchView.originalCenter == empty) {
-//                    touchView.backgroundColor = UIColor.green
-//                }
-//                else {
-//                    touchView.backgroundColor = UIColor.darkGray
-//                }
 
                 
                 empty = temporaryCenter
+                checkBlocks()
             }
             
         }
