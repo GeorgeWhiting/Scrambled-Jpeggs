@@ -28,6 +28,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         images = [#imageLiteral(resourceName: "Image1"), #imageLiteral(resourceName: "Image2"), #imageLiteral(resourceName: "Image3"), #imageLiteral(resourceName: "Image4"), #imageLiteral(resourceName: "Image5"), #imageLiteral(resourceName: "Image6"), #imageLiteral(resourceName: "Image7"), #imageLiteral(resourceName: "Image8"), #imageLiteral(resourceName: "Image9"), #imageLiteral(resourceName: "Image10"), #imageLiteral(resourceName: "Image11"), #imageLiteral(resourceName: "Image12"), #imageLiteral(resourceName: "Image13"), #imageLiteral(resourceName: "Image14"), #imageLiteral(resourceName: "Image15"), #imageLiteral(resourceName: "Image16")]
         makeBlocks()
+        scramble()
     }
     
     
@@ -80,6 +81,45 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             temporaryCentersArray.removeObject(at: randomIndex)
         }
         empty = temporaryCentersArray[0] as! CGPoint
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let myTouch : UITouch = touches.first!
+        
+        if (blockArray.contains(myTouch.view as Any))        {
+            
+            let touchView: MyBlock = (myTouch.view)! as! MyBlock
+            print("-------")
+            print(empty.x)
+            print(touchView)
+            
+            let xOffset: CGFloat = touchView.center.x - empty.x
+            let yOffset: CGFloat = touchView.center.y - empty.y
+            
+            let distanceBetweenCenters : CGFloat = sqrt(pow(xOffset, 2) + pow(yOffset, 2))
+            
+            if (distanceBetweenCenters == blockWidth) {
+                let temporaryCenter : CGPoint = touchView.center
+                
+                
+                UIView.beginAnimations(nil, context: nil)
+                UIView.setAnimationDuration(0.2)
+                touchView.center = empty
+                UIView.commitAnimations()
+                
+//                if (touchView.originalCenter == empty) {
+//                    touchView.backgroundColor = UIColor.green
+//                }
+//                else {
+//                    touchView.backgroundColor = UIColor.darkGray
+//                }
+
+                
+                empty = temporaryCenter
+            }
+            
+        }
+        
     }
     
     var newPic: Bool?
