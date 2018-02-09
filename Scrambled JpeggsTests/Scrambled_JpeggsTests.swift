@@ -84,8 +84,13 @@ class Scrambled_JpeggsTests: XCTestCase {
         }
         
         XCTAssertTrue(emptyBlockExists)
+    }
+    
+    func testClearBlocks() {
+        game.makeBlocks()
+        game.clearBlocks()
         
-        
+        XCTAssertEqual(game.blockArray.count, 0)
     }
 
 }

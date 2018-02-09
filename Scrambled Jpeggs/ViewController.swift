@@ -22,7 +22,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBAction func ResetButton(_ sender: Any) {
         scramble()
-        
     }
 
     
@@ -73,6 +72,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         finalBlock.removeFromSuperview()
         blockArray.removeObject(at: 15)
         
+    }
+    
+    func clearBlocks(){
+        for i in 0..<15 {
+            (blockArray[i] as! MyBlock).removeFromSuperview()
+        }
+        blockArray = []
     }
     
     func scramble() {
@@ -164,7 +170,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         if mediaType.isEqual(to: kUTTypeImage as String) {
             let image = info[UIImagePickerControllerOriginalImage] as! UIImage
             images = slice(image: image, into: 4)
+            
+            clearBlocks()
             makeBlocks()
+            scramble()
             
             if newPic == true {
                 UIImageWriteToSavedPhotosAlbum(image, self, #selector(imageError), nil)
