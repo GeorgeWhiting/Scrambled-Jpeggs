@@ -7,6 +7,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBOutlet weak var timerLabel: UILabel!
     
+    @IBOutlet weak var scrambleJpeggButton: UIButton!
     @IBAction func ResetButton(_ sender: Any) {
     }
     
@@ -18,10 +19,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     var blockArray: NSMutableArray = []
     var centersArray: NSMutableArray = []
+    var image: NSMutableArray = []
     var picNum : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.scrambleJpeggButton.isHidden = true
+        image = [#imageLiteral(resourceName: "Image1"), #imageLiteral(resourceName: "Image2"), #imageLiteral(resourceName: "Image3"), #imageLiteral(resourceName: "Image4"), #imageLiteral(resourceName: "Image5"), #imageLiteral(resourceName: "Image6"), #imageLiteral(resourceName: "Image7"), #imageLiteral(resourceName: "Image8"), #imageLiteral(resourceName: "Image9"), #imageLiteral(resourceName: "Image10"), #imageLiteral(resourceName: "Image11"), #imageLiteral(resourceName: "Image12"), #imageLiteral(resourceName: "Image13"), #imageLiteral(resourceName: "Image14"), #imageLiteral(resourceName: "Image15"), #imageLiteral(resourceName: "Image16")]
         makeBlocks()
     }
     
@@ -38,8 +42,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         picNum = 0
         
-        let image = [#imageLiteral(resourceName: "Image1"), #imageLiteral(resourceName: "Image2"), #imageLiteral(resourceName: "Image3"), #imageLiteral(resourceName: "Image4"), #imageLiteral(resourceName: "Image5"), #imageLiteral(resourceName: "Image6"), #imageLiteral(resourceName: "Image7"), #imageLiteral(resourceName: "Image8"), #imageLiteral(resourceName: "Image9"), #imageLiteral(resourceName: "Image10"), #imageLiteral(resourceName: "Image11"), #imageLiteral(resourceName: "Image12"), #imageLiteral(resourceName: "Image13"), #imageLiteral(resourceName: "Image14"), #imageLiteral(resourceName: "Image15"), #imageLiteral(resourceName: "Image16")]
-        
         for _ in 0..<4 {
             for _ in 0..<4 {
                 let blockFrame : CGRect = CGRect(x: 0, y: 0, width: blockWidth, height: blockWidth)
@@ -47,7 +49,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 let thisCenter : CGPoint = CGPoint(x: xCenter, y: yCenter)
                 
                 block.isUserInteractionEnabled = true
-                block.image = image[picNum]
+                block.image = (image[picNum] as! UIImage)
                 picNum += 1
                 
                 block.center = thisCenter
@@ -102,7 +104,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         myAlert.addAction(cameraAction)
         myAlert.addAction(cameraRollAction)
         self.present(myAlert, animated: true)
-        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -111,9 +112,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             let image = info[UIImagePickerControllerOriginalImage] as! UIImage
             imageView.image = image
             
+            
             if newPic == true {
                 UIImageWriteToSavedPhotosAlbum(image, self, #selector(imageError), nil)
+                self.scrambleJpeggButton.isHidden = false
             }
+            
+            self.scrambleJpeggButton.isHidden = false
         }
         self.dismiss(animated: true, completion: nil)
     }
@@ -131,7 +136,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
 
-
+    @IBAction func scrambleJpeggTapped(_ sender: Any) {
+        
+    }
+    
 }
 class MyBlock : UIImageView {
     var originalCenter: CGPoint!
