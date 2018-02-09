@@ -196,26 +196,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func slice(image: UIImage, into howMany: Int) -> [UIImage] {
-        let width: CGFloat
-        let height: CGFloat
-        
-        switch image.imageOrientation {
-        case .left, .leftMirrored, .right, .rightMirrored:
-            width = image.size.height
-            height = image.size.width
-        default:
-            width = image.size.width
-            height = image.size.height
-        }
-        
+
+        let width: CGFloat = image.size.width
+        let height: CGFloat = image.size.height
         let tileWidth = Int(width / CGFloat(howMany))
         let tileHeight = Int(height / CGFloat(howMany))
-        
         let scale = Int(image.scale)
-        var images = [UIImage]()
-        
+        var imageSections = [UIImage]()
         let cgImage = image.cgImage!
-        
         var adjustedHeight = tileHeight
         
         var y = 0
@@ -232,12 +220,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 let origin = CGPoint(x: x * scale, y: y * scale)
                 let size = CGSize(width: adjustedWidth * scale, height: adjustedHeight * scale)
                 let tileCgImage = cgImage.cropping(to: CGRect(origin: origin, size: size))!
-                images.append(UIImage(cgImage: tileCgImage, scale: image.scale, orientation: image.imageOrientation))
+                imageSections.append(UIImage(cgImage: tileCgImage, scale: image.scale, orientation: image.imageOrientation))
                 x += tileWidth
             }
             y += tileHeight
         }
-        return images
+        return imageSections
     }
     
 }
