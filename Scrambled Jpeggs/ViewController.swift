@@ -20,6 +20,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var centersArray: NSMutableArray = []
     var images: [UIImage] = []
     var picNum : Int = 0
+    
+    var empty: CGPoint!
 
     
     override func viewDidLoad() {
@@ -77,7 +79,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             (anyBlock as! MyBlock).center = randomCenter
             temporaryCentersArray.removeObject(at: randomIndex)
         }
-        
+        empty = temporaryCentersArray[0] as! CGPoint
     }
     
     var newPic: Bool?

@@ -74,6 +74,19 @@ class Scrambled_JpeggsTests: XCTestCase {
         }
         XCTAssertTrue(blockHasChanged)
     }
+    
+    func testEmptyBlock() {
+        game.makeBlocks()
+        game.scramble()
+        var emptyBlockExists = false
+        if game.empty != nil {
+            emptyBlockExists = true
+        }
+        
+        XCTAssertTrue(emptyBlockExists)
+        
+        
+    }
 
 }
 
