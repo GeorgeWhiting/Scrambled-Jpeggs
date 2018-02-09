@@ -20,7 +20,7 @@ class Scrambled_JpeggsTests: XCTestCase {
     
     func testMakeBlocks() {
         game.makeBlocks()
-        XCTAssertEqual(game.blockArray.count, 16)
+        XCTAssertEqual(game.blockArray.count, 15)
     }
     
     func testBlock1CenterPoint() {
@@ -54,6 +54,13 @@ class Scrambled_JpeggsTests: XCTestCase {
     func testOriginalCenter() {
         game.makeBlocks()
         XCTAssertEqual((game.blockArray[0] as! MyBlock).originalCenter, CGPoint(x: game.blockWidth/2, y: game.blockWidth/2))
+    }
+    
+    func testUserInteractionEnabled() {
+        game.makeBlocks()
+        for i in 0..<15 {
+            XCTAssertTrue(((game.blockArray[i]) as! MyBlock).isUserInteractionEnabled)
+        }
     }
 
 }
