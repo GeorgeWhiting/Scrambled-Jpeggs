@@ -12,6 +12,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     var xCenter : CGFloat!
     var yCenter : CGFloat!
+    var finalBlock : MyBlock!
     
     var blockArray: NSMutableArray = []
     var centersArray: NSMutableArray = []
@@ -29,7 +30,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         images = [#imageLiteral(resourceName: "Image1"), #imageLiteral(resourceName: "Image2"), #imageLiteral(resourceName: "Image3"), #imageLiteral(resourceName: "Image4"), #imageLiteral(resourceName: "Image5"), #imageLiteral(resourceName: "Image6"), #imageLiteral(resourceName: "Image7"), #imageLiteral(resourceName: "Image8"), #imageLiteral(resourceName: "Image9"), #imageLiteral(resourceName: "Image10"), #imageLiteral(resourceName: "Image11"), #imageLiteral(resourceName: "Image12"), #imageLiteral(resourceName: "Image13"), #imageLiteral(resourceName: "Image14"), #imageLiteral(resourceName: "Image15"), #imageLiteral(resourceName: "Image16")]
         makeBlocks()
-//        scramble()
+        scramble()
         self.ResetButton(Any.self)
     }
     
@@ -68,7 +69,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             yCenter = yCenter + blockWidth
         }
         
-        let finalBlock : MyBlock = blockArray[15] as! MyBlock
+        finalBlock = blockArray[15] as! MyBlock
         finalBlock.removeFromSuperview()
         blockArray.removeObject(at: 15)
         
@@ -118,7 +119,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 empty = temporaryCenter
                 let gameOver = checkBlocks()
                 if gameOver == true {
-                    displayFinalBlock()
+                    gameView.addSubview(finalBlock)
                 }
             }
             
@@ -138,20 +139,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             return true
         }
         return false
-    }
-    
-    func displayFinalBlock() {
-        let blockFrame : CGRect = CGRect(x: 0, y: 0, width: blockWidth, height: blockWidth)
-        let block: MyBlock = MyBlock (frame: blockFrame)
-        let thisCenter : CGPoint = CGPoint(x: gameViewWidth - (blockWidth/2) , y: gameViewWidth - (blockWidth/2))
-        block.image = images.last
-        block.center = thisCenter
-       
-        
-        gameView.addSubview(block)
-        blockArray.add(block)
-
-        
     }
     
     var newPic: Bool?
