@@ -116,7 +116,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
                 
                 empty = temporaryCenter
-                checkBlocks()
+                let gameOver = checkBlocks()
+                if gameOver == true {
+                    displayFinalBlock()
+                }
             }
             
         }
@@ -135,6 +138,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             return true
         }
         return false
+    }
+    
+    func displayFinalBlock() {
+        let blockFrame : CGRect = CGRect(x: 0, y: 0, width: blockWidth, height: blockWidth)
+        let block: MyBlock = MyBlock (frame: blockFrame)
+        let thisCenter : CGPoint = CGPoint(x: gameViewWidth - (blockWidth/2) , y: gameViewWidth - (blockWidth/2))
+        block.image = images.last
+        block.center = thisCenter
+       
+        
+        gameView.addSubview(block)
+        blockArray.add(block)
+
+        
     }
     
     var newPic: Bool?

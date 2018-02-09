@@ -103,9 +103,16 @@ class Scrambled_JpeggsTests: XCTestCase {
         game.scramble()
         XCTAssertFalse(game.checkBlocks())
     }
-
+    
+    func testFillInLastBlock() {
+        game.makeBlocks()
+        game.displayFinalBlock()
+        XCTAssertEqual(game.blockArray.count, 16)
+    }
+   
 }
 
 
+    
 
 
