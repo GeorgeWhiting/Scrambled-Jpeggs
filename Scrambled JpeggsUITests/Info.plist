@@ -18,5 +18,9 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Scrambled Jpeggs demands access to your camera!</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Scrambled Jpeggs wants to browse your private photos and judge you</string>
 </dict>
 </plist>
