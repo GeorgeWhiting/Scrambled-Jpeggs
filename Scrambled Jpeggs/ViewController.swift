@@ -60,7 +60,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBOutlet weak var imageView: UIImageView!
     
-    @IBAction func uploadImageTapped(_ sender: Any) {
+    @IBAction func uploadImageTaped(_ sender: Any) {
+
         let myAlert = UIAlertController(title: "Select image from", message: "", preferredStyle: .actionSheet)
         let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action) in
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
