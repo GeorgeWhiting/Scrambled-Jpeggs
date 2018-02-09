@@ -20,6 +20,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var centersArray: NSMutableArray = []
     var images: [UIImage] = []
     var picNum : Int = 0
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +66,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let finalBlock : MyBlock = blockArray[15] as! MyBlock
         finalBlock.removeFromSuperview()
         blockArray.removeObject(at: 15)
+        
+    }
+    
+    func scramble() {
+        let temporaryCentersArray: NSMutableArray = centersArray.mutableCopy() as! NSMutableArray
+        for anyBlock in blockArray {
+            let randomIndex: Int = Int(arc4random()) % temporaryCentersArray.count
+            let randomCenter: CGPoint = temporaryCentersArray[randomIndex] as! CGPoint
+            (anyBlock as! MyBlock).center = randomCenter
+            temporaryCentersArray.removeObject(at: randomIndex)
+        }
         
     }
     

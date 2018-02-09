@@ -62,6 +62,18 @@ class Scrambled_JpeggsTests: XCTestCase {
             XCTAssertTrue(((game.blockArray[i]) as! MyBlock).isUserInteractionEnabled)
         }
     }
+    
+    func testRandomnize() {
+        game.makeBlocks()
+        game.scramble()
+        var blockHasChanged = false
+        for anyBlock in game.blockArray{
+            if (anyBlock as! MyBlock).center != (anyBlock as! MyBlock).originalCenter {
+            blockHasChanged = true
+            }
+        }
+        XCTAssertTrue(blockHasChanged)
+    }
 
 }
 
