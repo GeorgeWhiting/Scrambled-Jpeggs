@@ -1,5 +1,6 @@
 import UIKit
 import MobileCoreServices
+import AVFoundation
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -44,8 +45,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         scaleToScreen()
         images = [#imageLiteral(resourceName: "Image1"), #imageLiteral(resourceName: "Image2"), #imageLiteral(resourceName: "Image3"), #imageLiteral(resourceName: "Image4"), #imageLiteral(resourceName: "Image5"), #imageLiteral(resourceName: "Image6"), #imageLiteral(resourceName: "Image7"), #imageLiteral(resourceName: "Image8"), #imageLiteral(resourceName: "Image9"), #imageLiteral(resourceName: "Image10"), #imageLiteral(resourceName: "Image11"), #imageLiteral(resourceName: "Image12"), #imageLiteral(resourceName: "Image13"), #imageLiteral(resourceName: "Image14"), #imageLiteral(resourceName: "Image15"), #imageLiteral(resourceName: "Image16")]
         makeBlocks()
+        playBackgroundMusic()
         
         self.ResetButton(Any.self)
+    }
+    var audioPlayer = AVAudioPlayer()
+    func playBackgroundMusic() {
+        let aSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "background_music", ofType: "mp3")!)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf:aSound as URL)
+            audioPlayer.numberOfLoops = -1
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+        } catch {
+            print("Cannot play the file")
+        }
     }
     
     func scaleToScreen() {
