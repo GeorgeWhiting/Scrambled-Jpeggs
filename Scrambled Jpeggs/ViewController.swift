@@ -62,7 +62,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     var audioPlayer = AVAudioPlayer()
-
+    
     func playBackgroundMusic() {
         let aSound = NSDataAsset(name: "background_music")
         do {
