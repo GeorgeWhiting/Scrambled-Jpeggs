@@ -28,6 +28,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBAction func ResetButton(_ sender: Any) {
         clickCount = 0
+        clickCounterLabel.text = String.init(format: "%d", clickCount)
         scramble()
     }
     
