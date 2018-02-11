@@ -116,6 +116,13 @@ class Scrambled_JpeggsTests: XCTestCase {
         game.clickAction()
         XCTAssertEqual(game.clickCount,1)
     }
+    
+    func testBlocksCantMoveAfterWinning() {
+        game.makeBlocks()
+        game.gameOverLogic()
+        XCTAssertFalse((game.blockArray[1] as! MyBlock).isUserInteractionEnabled)
+    }
+    
    
 }
 

@@ -123,14 +123,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 self.clickAction()
                 
                 empty = temporaryCenter
-                let gameOver = checkBlocks()
-                if gameOver == true {
-                    displayFinalBlock()
+                if checkBlocks() == true {
+                    gameOverLogic()
                 }
             }
             
         }
         
+    }
+    
+    func gameOverLogic() {
+        for i in 0..<15 {
+            (blockArray[i] as! MyBlock).isUserInteractionEnabled = false
+        }
+        displayFinalBlock()
     }
     
     func checkBlocks() -> Bool {
