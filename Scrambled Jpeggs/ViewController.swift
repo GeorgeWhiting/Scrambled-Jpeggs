@@ -29,6 +29,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func ResetButton(_ sender: Any) {
         clickCount = 0
         clickCounterLabel.text = String.init(format: "%d", clickCount)
+        
         scramble()
     }
     
@@ -224,7 +225,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             
             clearBlocks()
             makeBlocks()
-            scramble()
+            self.ResetButton(Any.self)
             
             if newPic == true {
                 UIImageWriteToSavedPhotosAlbum(image, self, #selector(imageError), nil)
