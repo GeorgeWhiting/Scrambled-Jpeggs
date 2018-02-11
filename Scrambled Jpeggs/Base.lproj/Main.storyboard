@@ -61,6 +61,9 @@
                                 <rect key="frame" x="379" y="706" width="35" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Mute"/>
+                                <connections>
+                                    <action selector="Mute:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yyD-X7-Pze"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

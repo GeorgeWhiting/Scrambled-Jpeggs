@@ -12,6 +12,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var uploadImageButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
     
+    @IBAction func Mute(_ sender: UIButton) {
+        audioPlayer.stop()
+    }
     var gameViewWidth : CGFloat!
     var blockWidth : CGFloat!
     
