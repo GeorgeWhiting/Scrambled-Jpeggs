@@ -4,8 +4,8 @@ import MobileCoreServices
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var gameView: UIView!
-    
-    @IBOutlet weak var timerLabel: UILabel!
+
+    @IBOutlet weak var clickCounterLabel: UILabel!
     
     var gameViewWidth : CGFloat!
     var blockWidth : CGFloat!
@@ -17,11 +17,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var centersArray: NSMutableArray = []
     var images: [UIImage] = []
     var picNum : Int = 0
-    
     var empty: CGPoint!
+    var clickCount : Int = 0
     
     @IBAction func ResetButton(_ sender: Any) {
+        clickCount = 0
         scramble()
+    }
+    
+    @objc func clickAction()
+    {
+        clickCount += 1
+        clickCounterLabel.text = String.init(format: "%d", clickCount)
     }
 
     
@@ -113,7 +120,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 touchView.center = empty
                 UIView.commitAnimations()
                 
-
+                self.clickAction()
                 
                 empty = temporaryCenter
                 let gameOver = checkBlocks()

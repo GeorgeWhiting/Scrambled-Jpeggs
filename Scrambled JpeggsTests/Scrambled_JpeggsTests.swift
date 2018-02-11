@@ -109,6 +109,13 @@ class Scrambled_JpeggsTests: XCTestCase {
         game.displayFinalBlock()
         XCTAssertEqual(game.blockArray.count, 16)
     }
+    
+    func testClickCounterIncrements() {
+        game.makeBlocks()
+        game.scramble()
+        game.clickAction()
+        XCTAssertEqual(game.clickCount,1)
+    }
    
 }
 
