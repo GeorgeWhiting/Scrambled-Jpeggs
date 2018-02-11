@@ -64,6 +64,9 @@
                     <connections>
                         <outlet property="clickCounterLabel" destination="ZSw-xy-V8C" id="1S1-Vt-W2A"/>
                         <outlet property="gameView" destination="rFZ-AH-hSd" id="NJm-ik-XWo"/>
+                        <outlet property="resetButton" destination="kCk-jv-bKS" id="v6e-k1-FjO"/>
+                        <outlet property="timerLabel" destination="ZSw-xy-V8C" id="lny-F4-TU7"/>
+                        <outlet property="uploadImageButton" destination="TQG-0u-SDp" id="AKM-CC-G0R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -7,6 +7,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     @IBOutlet weak var clickCounterLabel: UILabel!
     
+    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var uploadImageButton: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
+    
     var gameViewWidth : CGFloat!
     var blockWidth : CGFloat!
     
@@ -18,6 +22,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var centersArray: NSMutableArray = []
     var images: [UIImage] = []
     var picNum : Int = 0
+    
     var empty: CGPoint!
     var clickCount : Int = 0
     
