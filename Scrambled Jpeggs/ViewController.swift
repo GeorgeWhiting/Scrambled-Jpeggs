@@ -49,9 +49,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         rowSize = 4
         visibleBlocks = (rowSize * rowSize) - 1
-        super.viewDidLoad()
+        difficultyControl.selectedSegmentIndex =  1
         scaleToScreen()
         gameImage = #imageLiteral(resourceName: "square-deer")
         images = slice(image: gameImage, into:rowSize)
