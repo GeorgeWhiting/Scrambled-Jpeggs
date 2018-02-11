@@ -1,5 +1,6 @@
 import UIKit
 import MobileCoreServices
+import AVFoundation
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -11,6 +12,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var uploadImageButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
     
+    @IBAction func Mute(_ sender: UIButton) {
+        audioPlayer.stop()
+    }
     var gameViewWidth : CGFloat!
     var blockWidth : CGFloat!
     var visibleBlocks : Int!
@@ -51,6 +55,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         images = slice(image: #imageLiteral(resourceName: "square-deer"), into:rowSize)
         makeBlocks()
         self.ResetButton(Any.self)
+    }
+    var audioPlayer = AVAudioPlayer()
+    func playBackgroundMusic() {
+        let aSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "background_music", ofType: "mp3")!)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf:aSound as URL)
+            audioPlayer.numberOfLoops = -1
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+        } catch {
+            print("Cannot play the file")
+        }
     }
     
     func scaleToScreen() {
