@@ -179,11 +179,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         block.image = images.last
         block.center = thisCenter
        
-        
-        gameView.addSubview(block)
-        blockArray.add(block)
-
-        
+        gameView.addSubview(block) 
     }
     
     
