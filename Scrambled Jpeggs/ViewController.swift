@@ -13,7 +13,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     var gameViewWidth : CGFloat!
     var blockWidth : CGFloat!
-    var gridSize : Int!
+    var visibleBlocks : Int!
+    var rowSize : Int!
+
     
     var xCenter : CGFloat!
     var yCenter : CGFloat!
@@ -41,9 +43,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     
     override func viewDidLoad() {
+        rowSize = 4
+        visibleBlocks = (rowSize * rowSize) - 1
         super.viewDidLoad()
         scaleToScreen()
-        images = slice(image: #imageLiteral(resourceName: "square-deer"), into: 4)
+        images = slice(image: #imageLiteral(resourceName: "square-deer"), into:rowSize)
         makeBlocks()
         self.ResetButton(Any.self)
     }
@@ -60,15 +64,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         centersArray = []
         
         gameViewWidth = gameView.frame.size.width
-        blockWidth = gameViewWidth / 4
+        blockWidth = gameViewWidth / CGFloat(rowSize)
         
         xCenter = blockWidth / 2
         yCenter = blockWidth / 2
         
         picNum = 0
         
-        for _ in 0..<4 {
-            for _ in 0..<4 {
+        for _ in 0..<rowSize {
+            for _ in 0..<rowSize {
                 let blockFrame : CGRect = CGRect(x: 0, y: 0, width: blockWidth, height: blockWidth)
                 let block: MyBlock = MyBlock (frame: blockFrame)
                 let thisCenter : CGPoint = CGPoint(x: xCenter, y: yCenter)
@@ -89,14 +93,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             yCenter = yCenter + blockWidth
         }
         
-        finalBlock = blockArray[15] as! MyBlock
+        finalBlock = blockArray[visibleBlocks] as! MyBlock
         finalBlock.removeFromSuperview()
-        blockArray.removeObject(at: 15)
+        blockArray.removeObject(identicalTo: finalBlock)
         
     }
     
     func clearBlocks(){
-        for i in 0..<15 {
+        for i in 0..<visibleBlocks {
             (blockArray[i] as! MyBlock).removeFromSuperview()
         }
         blockArray = []
@@ -125,7 +129,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             
             let distanceBetweenCenters : CGFloat = sqrt(pow(xOffset, 2) + pow(yOffset, 2))
             
-            if (distanceBetweenCenters == blockWidth) {
+            if (Int(distanceBetweenCenters) == Int(blockWidth)) {
                 let temporaryCenter : CGPoint = touchView.center
                 
                 
@@ -147,7 +151,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func gameOverLogic() {
-        for i in 0..<15 {
+        for i in 0..<visibleBlocks {
             (blockArray[i] as! MyBlock).isUserInteractionEnabled = false
         }
         displayFinalBlock()
@@ -156,12 +160,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func checkBlocks() -> Bool {
         var correctBlockCounter = 0
         
-        for i in 0..<15 {
+        for i in 0..<visibleBlocks {
             if (blockArray[i] as! MyBlock).center == (blockArray[i] as! MyBlock).originalCenter {
                correctBlockCounter += 1
             }
         }
-        if correctBlockCounter == 15 {
+        if correctBlockCounter == visibleBlocks {
             return true
         }
         return false
@@ -220,7 +224,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         if mediaType.isEqual(to: kUTTypeImage as String) {
             let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-            images = slice(image: image, into: 4)
+            images = slice(image: image, into: rowSize)
             
             clearBlocks()
             makeBlocks()
