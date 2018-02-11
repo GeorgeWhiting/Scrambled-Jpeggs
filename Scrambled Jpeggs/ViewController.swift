@@ -54,13 +54,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         scaleToScreen()
         images = slice(image: #imageLiteral(resourceName: "square-deer"), into:rowSize)
         makeBlocks()
+        playBackgroundMusic()
         self.ResetButton(Any.self)
     }
     var audioPlayer = AVAudioPlayer()
+
     func playBackgroundMusic() {
-        let aSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "background_music", ofType: "mp3")!)
+        let aSound = NSDataAsset(name: "background_music")
         do {
-            audioPlayer = try AVAudioPlayer(contentsOf:aSound as URL)
+            audioPlayer = try AVAudioPlayer(data:(aSound?.data)!, fileTypeHint: "mp3")
             audioPlayer.numberOfLoops = -1
             audioPlayer.prepareToPlay()
             audioPlayer.play()
