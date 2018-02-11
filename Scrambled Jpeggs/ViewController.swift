@@ -12,6 +12,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     var xCenter : CGFloat!
     var yCenter : CGFloat!
+    var finalBlock : MyBlock!
     
     var blockArray: NSMutableArray = []
     var centersArray: NSMutableArray = []
@@ -34,12 +35,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        scaleToScreen()
         images = [#imageLiteral(resourceName: "Image1"), #imageLiteral(resourceName: "Image2"), #imageLiteral(resourceName: "Image3"), #imageLiteral(resourceName: "Image4"), #imageLiteral(resourceName: "Image5"), #imageLiteral(resourceName: "Image6"), #imageLiteral(resourceName: "Image7"), #imageLiteral(resourceName: "Image8"), #imageLiteral(resourceName: "Image9"), #imageLiteral(resourceName: "Image10"), #imageLiteral(resourceName: "Image11"), #imageLiteral(resourceName: "Image12"), #imageLiteral(resourceName: "Image13"), #imageLiteral(resourceName: "Image14"), #imageLiteral(resourceName: "Image15"), #imageLiteral(resourceName: "Image16")]
         makeBlocks()
         
         self.ResetButton(Any.self)
     }
     
+    func scaleToScreen() {
+        timerLabel.frame.size.width = gameView.frame.size.width
+        uploadImageButton.frame.size.width = gameView.frame.size.width
+        resetButton.frame.size.width = gameView.frame.size.width
+        gameView.frame.size.height = gameView.frame.size.width
+    }
     
     func makeBlocks() {
         blockArray = []
@@ -75,7 +83,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             yCenter = yCenter + blockWidth
         }
         
-        let finalBlock : MyBlock = blockArray[15] as! MyBlock
+        finalBlock = blockArray[15] as! MyBlock
         finalBlock.removeFromSuperview()
         blockArray.removeObject(at: 15)
         
