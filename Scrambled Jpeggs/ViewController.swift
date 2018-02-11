@@ -29,6 +29,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var centersArray: NSMutableArray = []
     var images: [UIImage] = []
     var picNum : Int = 0
+    var gameImage : UIImage!
     
     var empty: CGPoint!
     var clickCount : Int = 0
@@ -52,11 +53,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         visibleBlocks = (rowSize * rowSize) - 1
         super.viewDidLoad()
         scaleToScreen()
-        images = slice(image: #imageLiteral(resourceName: "square-deer"), into:rowSize)
+        gameImage = #imageLiteral(resourceName: "square-deer")
+        images = slice(image: gameImage, into:rowSize)
         makeBlocks()
         self.ResetButton(Any.self)
     }
+    
     var audioPlayer = AVAudioPlayer()
+    
     func playBackgroundMusic() {
         let aSound = NSURL(fileURLWithPath: Bundle.main.path(forResource: "background_music", ofType: "mp3")!)
         do {
@@ -198,6 +202,27 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         gameView.addSubview(block) 
     }
     
+    @IBOutlet weak var difficultyControl: UISegmentedControl!
+    
+    @IBAction func difficultyTapped(_ sender: Any) {
+        switch difficultyControl.selectedSegmentIndex
+        {
+            case 0:
+            rowSize = 3
+            case 1:
+            rowSize = 4
+            case 2:
+            rowSize = 5
+        default:
+            rowSize = 4
+        }
+        visibleBlocks = (rowSize * rowSize) - 1
+        images = slice(image: gameImage, into: rowSize)
+        clearBlocks()
+        makeBlocks()
+        self.ResetButton(Any.self)
+    }
+    
     
     var newPic: Bool?
     
@@ -236,15 +261,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         if mediaType.isEqual(to: kUTTypeImage as String) {
-            let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-            images = slice(image: image, into: rowSize)
+            gameImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+            images = slice(image: gameImage, into: rowSize)
             
             clearBlocks()
             makeBlocks()
             self.ResetButton(Any.self)
             
             if newPic == true {
-                UIImageWriteToSavedPhotosAlbum(image, self, #selector(imageError), nil)
+                UIImageWriteToSavedPhotosAlbum(gameImage, self, #selector(imageError), nil)
             }
         }
         self.dismiss(animated: true, completion: nil)
