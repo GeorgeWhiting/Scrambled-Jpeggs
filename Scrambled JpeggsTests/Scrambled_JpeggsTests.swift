@@ -117,6 +117,13 @@ class Scrambled_JpeggsTests: XCTestCase {
         XCTAssertEqual(game.clickCount,1)
     }
     
+    func testClickCounterIncrementsLabel() {
+        game.makeBlocks()
+        game.scramble()
+        game.clickAction()
+        XCTAssertEqual(game.clickCounterLabel.text,"1")
+    }
+    
     func testClickCounterResets() {
         game.makeBlocks()
         game.scramble()
@@ -124,6 +131,35 @@ class Scrambled_JpeggsTests: XCTestCase {
         game.clickAction()
         game.ResetButton((Any).self)
         XCTAssertEqual(game.clickCount,0)
+    }
+    
+    func testClickCounterResetsLabel() {
+        game.makeBlocks()
+        game.scramble()
+        game.clickAction()
+        game.clickAction()
+        game.ResetButton((Any).self)
+        XCTAssertEqual(game.clickCounterLabel.text,"0")
+    }
+    
+    func testClickCounterIncrementsAfterReset() {
+        game.makeBlocks()
+        game.scramble()
+        game.clickAction()
+        game.ResetButton((Any).self)
+        game.clickAction()
+        game.clickAction()
+        XCTAssertEqual(game.clickCount,2)
+    }
+    
+    func testClickCounterIncrementsLabelAfterReset() {
+        game.makeBlocks()
+        game.scramble()
+        game.clickAction()
+        game.ResetButton((Any).self)
+        game.clickAction()
+        game.clickAction()
+        XCTAssertEqual(game.clickCounterLabel.text,"2")
     }
     
     func testBlocksCantMoveAfterWinning() {
