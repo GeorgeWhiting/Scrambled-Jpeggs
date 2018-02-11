@@ -205,6 +205,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var difficultyControl: UISegmentedControl!
     
     @IBAction func difficultyTapped(_ sender: Any) {
+        clearBlocks()
         switch difficultyControl.selectedSegmentIndex
         {
             case 0:
@@ -218,7 +219,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         visibleBlocks = (rowSize * rowSize) - 1
         images = slice(image: gameImage, into: rowSize)
-        clearBlocks()
         makeBlocks()
         self.ResetButton(Any.self)
     }
