@@ -95,13 +95,15 @@ class Scrambled_JpeggsTests: XCTestCase {
     
     func testCheckAllTilesInRightPlace() {
         game.makeBlocks()
-        XCTAssertTrue(game.checkBlocks())
+        game.checkBlocks()
+        XCTAssertTrue(game.gameOver)
     }
     
     func testTilesInWrongPlace() {
         game.makeBlocks()
         game.scramble()
-        XCTAssertFalse(game.checkBlocks())
+        game.checkBlocks()
+        XCTAssertFalse(game.gameOver)
     }
     
     func testFillInLastBlock() {
@@ -162,18 +164,21 @@ class Scrambled_JpeggsTests: XCTestCase {
         XCTAssertEqual(game.clickCounterLabel.text,"2")
     }
     
-    func testBlocksCantMoveAfterWinning() {
+    func testBlocksCanBeDisabled() {
         game.makeBlocks()
-        game.gameOverLogic()
+        game.setUserInteractionStateForAllBlocks(state: false)
         XCTAssertFalse((game.blockArray[1] as! MyBlock).isUserInteractionEnabled)
     }
     
-    func testShowSolutionCorrectsBlockOrder() {
+    func testBlocksCanBeEnabled() {
         game.makeBlocks()
-        game.scramble()
-        game.showSolutionTapped((Any).self)
-        XCTAssertTrue(game.checkBlocks())
+        game.setUserInteractionStateForAllBlocks(state: false)
+        game.setUserInteractionStateForAllBlocks(state: true)
+        XCTAssertTrue((game.blockArray[1] as! MyBlock).isUserInteractionEnabled)
     }
+    
+    
+    
 }
 
 
