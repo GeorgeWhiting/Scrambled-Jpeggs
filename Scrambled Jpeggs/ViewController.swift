@@ -223,6 +223,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         gameView.addSubview(block) 
     }
     
+    @IBAction func showSolutionTapped(_ sender: Any) {
+        for i in 0..<visibleBlocks {
+            (blockArray[i] as! MyBlock).center = (blockArray[i] as! MyBlock).originalCenter
+        }
+    }
+    
+    
     @IBAction func Mute(_ sender: UIButton) {
         audioPlayer.stop()
     }

@@ -171,7 +171,7 @@ class Scrambled_JpeggsTests: XCTestCase {
     func testShowSolutionCorrectsBlockOrder() {
         game.makeBlocks()
         game.scramble()
-        game.showSolution()
+        game.showSolutionTapped((Any).self)
         XCTAssertTrue(game.checkBlocks())
     }
    
