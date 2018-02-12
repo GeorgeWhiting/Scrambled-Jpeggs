@@ -174,7 +174,6 @@ class Scrambled_JpeggsTests: XCTestCase {
         game.showSolutionTapped((Any).self)
         XCTAssertTrue(game.checkBlocks())
     }
-   
 }
 
 

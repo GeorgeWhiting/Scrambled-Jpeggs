@@ -224,8 +224,31 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func showSolutionTapped(_ sender: Any) {
+        let tempCentersArray : NSMutableArray = []
+        (self.finalBlock).center = self.empty
+        
         for i in 0..<visibleBlocks {
-            (blockArray[i] as! MyBlock).center = (blockArray[i] as! MyBlock).originalCenter
+            tempCentersArray.add((blockArray[i] as! MyBlock).center)
+        }
+        
+        UIView.animate(withDuration: 1, animations: {
+            for i in 0..<self.visibleBlocks {
+                (self.self.blockArray[i] as! MyBlock).center = (self.blockArray[i] as! MyBlock).originalCenter
+            }
+            self.gameView.addSubview(self.finalBlock)
+            (self.finalBlock).center = (self.finalBlock).originalCenter
+            }) { _ in
+                UIView.animate(withDuration: 2, delay: 3, animations: {
+                    for i in 0..<self.visibleBlocks {
+                        (self.blockArray[i] as! MyBlock).center = (tempCentersArray[i] as! CGPoint)
+                    }
+                    (self.finalBlock).center = self.empty
+                }) { _ in
+                    UIView.animate(withDuration: 2, animations: {
+                        self.finalBlock.removeFromSuperview()
+                        (self.finalBlock).center = (self.finalBlock).originalCenter
+                    })
+                }
         }
     }
     
