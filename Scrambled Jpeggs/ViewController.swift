@@ -38,6 +38,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         makeBlocks()
         playBackgroundMusic()
         muteToggle.addTarget(self, action: #selector(toggleMusic), for: UIControlEvents.valueChanged)
+//        let temporaryCentersArray: NSMutableArray = centersArray.mutableCopy() as! NSMutableArray
+//        empty = temporaryCentersArray[15] as! CGPoint
         self.ResetButton(Any.self)
     }
     
@@ -144,7 +146,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func ResetButton(_ sender: Any) {
         clickCount = 0
         clickCounterLabel.text = String.init(format: "%d", clickCount)
-        
+        finalBlock.removeFromSuperview()
+        for i in 0..<visibleBlocks {
+            (blockArray[i] as! MyBlock).isUserInteractionEnabled = true
+        }
         scramble()
     }
     
@@ -176,7 +181,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let myTouch : UITouch = touches.first!
-        
         if (blockArray.contains(myTouch.view as Any))        {
             
             let touchView: MyBlock = (myTouch.view)! as! MyBlock
@@ -185,7 +189,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             let yOffset: CGFloat = touchView.center.y - empty.y
             
             let distanceBetweenCenters : CGFloat = sqrt(pow(xOffset, 2) + pow(yOffset, 2))
-            
+           
             if (Int(distanceBetweenCenters) == Int(blockWidth)) {
                 let temporaryCenter : CGPoint = touchView.center
                 
@@ -232,13 +236,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func displayFinalBlock() {
-        let blockFrame : CGRect = CGRect(x: 0, y: 0, width: blockWidth, height: blockWidth)
-        let block: MyBlock = MyBlock (frame: blockFrame)
-        let thisCenter : CGPoint = CGPoint(x: gameViewWidth - (blockWidth/2) , y: gameViewWidth - (blockWidth/2))
-        block.image = images.last
-        block.center = thisCenter
-       
-        gameView.addSubview(block)
+        gameView.addSubview(finalBlock)
         self.showEndAlert(Any.self)
     }
     
