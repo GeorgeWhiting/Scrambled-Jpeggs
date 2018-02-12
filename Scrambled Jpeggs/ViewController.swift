@@ -148,6 +148,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         scramble()
     }
     
+    @IBAction func showEndAlert(_ sender: Any) {
+        let alert = UIAlertController(title: "Congrats", message: "You did it in \(clickCount) moves!", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true)
+    }
+    
     func scramble() {
         let temporaryCentersArray: NSMutableArray = centersArray.mutableCopy() as! NSMutableArray
         for anyBlock in blockArray {
@@ -230,11 +238,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         block.image = images.last
         block.center = thisCenter
        
-        gameView.addSubview(block) 
-    }
-    
-    @IBAction func Mute(_ sender: UIButton) {
-        audioPlayer.stop()
+        gameView.addSubview(block)
+        self.showEndAlert(Any.self)
     }
     
     @IBAction func difficultyTapped(_ sender: Any) {
