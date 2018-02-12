@@ -10,6 +10,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var uploadImageButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var difficultyControl: UISegmentedControl!
+    @IBOutlet weak var muteToggle: UISwitch!
     
     var gameViewWidth : CGFloat!
     var blockWidth : CGFloat!
@@ -129,6 +130,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             audioPlayer.play()
         } catch {
             print("Cannot play the file")
+        }
+    }
+    
+    @objc func toggleMusic(switchState: UISwitch) {
+        if switchState.isOn {
+            audioPlayer.play()
+        } else {
+            audioPlayer.stop()
         }
     }
     
