@@ -22,11 +22,13 @@
                                 <rect key="frame" x="20" y="40" width="374" height="374"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <viewLayoutGuide key="safeArea" id="Uub-un-3pJ"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSw-xy-V8C" userLabel="Click Counter Label">
                                 <rect key="frame" x="20" y="425" width="374" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.71643614960169133" green="1" blue="0.987133761289962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <viewLayoutGuide key="safeArea" id="gch-ch-Lbb"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -39,6 +41,7 @@
                                 <rect key="frame" x="20" y="509" width="186" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.29206449559999997" green="1" blue="0.95018014159999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <viewLayoutGuide key="safeArea" id="mZp-WP-Y6h"/>
                                 <state key="normal" title="Upload image">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -50,6 +53,7 @@
                                 <rect key="frame" x="20" y="461" width="374" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.10757126076944579" green="0.18712809915585094" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <viewLayoutGuide key="safeArea" id="ml1-XN-059"/>
                                 <state key="normal" title="RESET">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -58,9 +62,10 @@
                                     <action selector="ResetButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ybV-sp-nlV"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="W1X-Ax-Vf2">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="W1X-Ax-Vf2">
                                 <rect key="frame" x="111" y="580" width="191" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <viewLayoutGuide key="safeArea" id="NqD-ZV-vfO"/>
                                 <segments>
                                     <segment title="Easy"/>
                                     <segment title="Medium"/>
@@ -70,9 +75,10 @@
                                     <action selector="difficultyTapped:" destination="BYZ-38-t0r" eventType="valueChanged" id="lrk-f9-j6V"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Music" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="258-xZ-L6n">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" text="Music" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="258-xZ-L6n">
                                 <rect key="frame" x="185" y="655" width="46" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <viewLayoutGuide key="safeArea" id="nxJ-vm-D8E"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -81,6 +87,7 @@
                                 <rect key="frame" x="208" y="509" width="186" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.29206449559999997" green="1" blue="0.95018014159999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <viewLayoutGuide key="safeArea" id="zNa-FK-QA3"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Show solution">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -89,9 +96,10 @@
                                     <action selector="showSolutionTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X0T-bQ-ckd"/>
                                 </connections>
                             </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T5C-Qm-fv7">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T5C-Qm-fv7">
                                 <rect key="frame" x="183" y="622" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <viewLayoutGuide key="safeArea" id="nWn-eb-opo"/>
                             </switch>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -103,6 +111,7 @@
                         <outlet property="gameView" destination="rFZ-AH-hSd" id="NJm-ik-XWo"/>
                         <outlet property="muteToggle" destination="T5C-Qm-fv7" id="rve-jX-P0o"/>
                         <outlet property="resetButton" destination="kCk-jv-bKS" id="v6e-k1-FjO"/>
+                        <outlet property="showSolutionButton" destination="48b-oM-Fsu" id="hQw-dK-A4C"/>
                         <outlet property="timerLabel" destination="ZSw-xy-V8C" id="lny-F4-TU7"/>
                         <outlet property="uploadImageButton" destination="TQG-0u-SDp" id="AKM-CC-G0R"/>
                     </connections>

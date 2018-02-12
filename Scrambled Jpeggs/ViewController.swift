@@ -8,6 +8,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var clickCounterLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var uploadImageButton: UIButton!
+    @IBOutlet weak var showSolutionButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var difficultyControl: UISegmentedControl!
     @IBOutlet weak var muteToggle: UISwitch!
@@ -44,10 +45,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func scaleToScreen() {
-        timerLabel.frame.size.width = gameView.frame.size.width
-        uploadImageButton.frame.size.width = gameView.frame.size.width
-        resetButton.frame.size.width = gameView.frame.size.width
         gameView.frame.size.height = gameView.frame.size.width
+        timerLabel.frame.size.width = gameView.frame.size.width
+        uploadImageButton.frame.size.width = (gameView.frame.size.width / 2) - 5
+        uploadImageButton.frame.size.width = (gameView.frame.size.width / 2) - 5
+        resetButton.frame.size.width = gameView.frame.size.width
     }
     
     func makeBlocks() {
