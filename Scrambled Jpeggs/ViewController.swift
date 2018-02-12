@@ -241,30 +241,32 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func showSolutionTapped(_ sender: Any) {
-        let tempCentersArray : NSMutableArray = []
-        (self.finalBlock).center = self.empty
+        if (!self.finalBlock.isDescendant(of: self.gameView.superview!)) {
+            let tempCentersArray : NSMutableArray = []
+            (self.finalBlock).center = self.empty
         
-        for i in 0..<visibleBlocks {
-            tempCentersArray.add((blockArray[i] as! MyBlock).center)
-        }
-        
-        UIView.animate(withDuration: 1, animations: {
-            for i in 0..<self.visibleBlocks {
-                (self.self.blockArray[i] as! MyBlock).center = (self.blockArray[i] as! MyBlock).originalCenter
+            for i in 0..<visibleBlocks {
+                tempCentersArray.add((blockArray[i] as! MyBlock).center)
             }
-            self.gameView.addSubview(self.finalBlock)
-            (self.finalBlock).center = (self.finalBlock).originalCenter
-        }) { _ in
-            UIView.animate(withDuration: 2, delay: 3, animations: {
+        
+            UIView.animate(withDuration: 1, animations: {
                 for i in 0..<self.visibleBlocks {
-                    (self.blockArray[i] as! MyBlock).center = (tempCentersArray[i] as! CGPoint)
+                    (self.self.blockArray[i] as! MyBlock).center = (self.blockArray[i] as! MyBlock).originalCenter
                 }
-                (self.finalBlock).center = self.empty
+                self.gameView.addSubview(self.finalBlock)
+                (self.finalBlock).center = (self.finalBlock).originalCenter
             }) { _ in
-                UIView.animate(withDuration: 2, animations: {
-                    self.finalBlock.removeFromSuperview()
-                    (self.finalBlock).center = (self.finalBlock).originalCenter
-                })
+                UIView.animate(withDuration: 2, delay: 3, animations: {
+                    for i in 0..<self.visibleBlocks {
+                        (self.blockArray[i] as! MyBlock).center = (tempCentersArray[i] as! CGPoint)
+                    }
+                    (self.finalBlock).center = self.empty
+                }) { _ in
+                    UIView.animate(withDuration: 2, animations: {
+                        self.finalBlock.removeFromSuperview()
+                        (self.finalBlock).center = (self.finalBlock).originalCenter
+                    })
+                }
             }
         }
     }
