@@ -27,6 +27,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var clickCount : Int = 0
     var audioPlayer = AVAudioPlayer()
     var newPic: Bool?
+    var gameOver : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +39,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         makeBlocks()
         playBackgroundMusic()
         muteToggle.addTarget(self, action: #selector(toggleMusic), for: UIControlEvents.valueChanged)
-//        let temporaryCentersArray: NSMutableArray = centersArray.mutableCopy() as! NSMutableArray
-//        empty = temporaryCentersArray[15] as! CGPoint
         self.ResetButton(Any.self)
     }
     
@@ -147,17 +146,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         clickCount = 0
         clickCounterLabel.text = String.init(format: "%d", clickCount)
         finalBlock.removeFromSuperview()
-        for i in 0..<visibleBlocks {
-            (blockArray[i] as! MyBlock).isUserInteractionEnabled = true
-        }
+        gameOver = false
+        setUserInteractionStateForAllBlocks(state: true)
         scramble()
     }
     
     @IBAction func showEndAlert(_ sender: Any) {
         let alert = UIAlertController(title: "Congrats", message: "You did it in \(clickCount) moves!", preferredStyle: .alert)
-        
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        
         self.present(alert, animated: true)
     }
     
@@ -198,12 +194,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 UIView.setAnimationDuration(0.2)
                 touchView.center = empty
                 UIView.commitAnimations()
-                
                 self.clickAction()
-                
                 empty = temporaryCenter
-                if checkBlocks() == true {
-                    gameOverLogic()
+                
+                checkBlocks()
+                if gameOver == true {
+                    setUserInteractionStateForAllBlocks(state: false)
+                    displayFinalBlock()
+                    displayGameOverAlert()
                 }
             }
         }
@@ -214,7 +212,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         clickCounterLabel.text = String.init(format: "%d", clickCount)
     }
     
-    func checkBlocks() -> Bool {
+    func checkBlocks() {
         var correctBlockCounter = 0
         
         for i in 0..<visibleBlocks {
@@ -223,25 +221,28 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
         if correctBlockCounter == visibleBlocks {
-            return true
+            gameOver = true
+        } else {
+            gameOver = false
         }
-        return false
     }
     
-    func gameOverLogic() {
+    func setUserInteractionStateForAllBlocks(state: Bool) {
         for i in 0..<visibleBlocks {
-            (blockArray[i] as! MyBlock).isUserInteractionEnabled = false
+            (blockArray[i] as! MyBlock).isUserInteractionEnabled = state
         }
-        displayFinalBlock()
     }
     
     func displayFinalBlock() {
         gameView.addSubview(finalBlock)
+    }
+    
+    func displayGameOverAlert() {
         self.showEndAlert(Any.self)
     }
     
     @IBAction func showSolutionTapped(_ sender: Any) {
-        if (!self.finalBlock.isDescendant(of: self.gameView.superview!)) {
+        if (gameOver == false) {
             let tempCentersArray : NSMutableArray = []
             (self.finalBlock).center = self.empty
         
