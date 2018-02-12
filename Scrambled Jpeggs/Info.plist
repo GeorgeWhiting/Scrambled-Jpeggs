@@ -41,5 +41,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Scrambled Eggs demands access to your camera!</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Scrambled Eggs demands to see your photos!</string>
 </dict>
 </plist>
