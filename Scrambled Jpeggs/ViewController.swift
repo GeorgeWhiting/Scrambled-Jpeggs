@@ -20,7 +20,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var visibleBlocks : Int!
     var rowSize : Int!
 
-    
     var xCenter : CGFloat!
     var yCenter : CGFloat!
     var finalBlock : MyBlock!
@@ -28,7 +27,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var blockArray: NSMutableArray = []
     var centersArray: NSMutableArray = []
     var images: [UIImage] = []
-    var picNum : Int = 0
     var gameImage : UIImage!
     
     var empty: CGPoint!
@@ -41,8 +39,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         scramble()
     }
     
-    @objc func clickAction()
-    {
+    @objc func clickAction() {
         clickCount += 1
         clickCounterLabel.text = String.init(format: "%d", clickCount)
     }
@@ -91,7 +88,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         xCenter = blockWidth / 2
         yCenter = blockWidth / 2
         
-        picNum = 0
+        var picNum = 0
         
         for _ in 0..<rowSize {
             for _ in 0..<rowSize {
