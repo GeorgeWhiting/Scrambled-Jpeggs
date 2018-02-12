@@ -12,9 +12,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var uploadImageButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
     
-    @IBAction func Mute(_ sender: UIButton) {
-        audioPlayer.stop()
-    }
+  
+    @IBOutlet weak var muteToggle: UISwitch!
+    
     var gameViewWidth : CGFloat!
     var blockWidth : CGFloat!
     var visibleBlocks : Int!
@@ -53,10 +53,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         gameImage = #imageLiteral(resourceName: "square-deer")
         makeBlocks()
         playBackgroundMusic()
+        muteToggle.addTarget(self, action: #selector(toggleMusic), for: UIControlEvents.valueChanged)
         self.ResetButton(Any.self)
     }
     
     var audioPlayer = AVAudioPlayer()
+    @objc func toggleMusic(switchState: UISwitch) {
+        if switchState.isOn {
+            audioPlayer.play()
+        } else {
+            audioPlayer.stop()
+        }
+        
+    }
     
     func playBackgroundMusic() {
         let aSound = NSDataAsset(name: "background_music")
