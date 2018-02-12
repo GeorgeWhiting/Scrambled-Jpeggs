@@ -168,7 +168,12 @@ class Scrambled_JpeggsTests: XCTestCase {
         XCTAssertFalse((game.blockArray[1] as! MyBlock).isUserInteractionEnabled)
     }
     
-   
+    func testShowSolutionCorrectsBlockOrder() {
+        game.makeBlocks()
+        game.scramble()
+        game.showSolutionTapped((Any).self)
+        XCTAssertTrue(game.checkBlocks())
+    }
 }
 
 
