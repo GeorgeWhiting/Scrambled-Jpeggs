@@ -57,19 +57,11 @@
                                     <action selector="ResetButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ybV-sp-nlV"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a6h-YW-Bv3">
-                                <rect key="frame" x="379" y="706" width="35" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Mute"/>
-                                <connections>
-                                    <action selector="Mute:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yyD-X7-Pze"/>
-                                </connections>
-                            </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="W1X-Ax-Vf2">
                                 <rect key="frame" x="113" y="548" width="191" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="easy"/>
+                                    <segment title="Easy"/>
                                     <segment title="Medium"/>
                                     <segment title="Hard"/>
                                 </segments>
@@ -77,6 +69,17 @@
                                     <action selector="difficultyTapped:" destination="BYZ-38-t0r" eventType="valueChanged" id="lrk-f9-j6V"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Music" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="258-xZ-L6n">
+                                <rect key="frame" x="185" y="655" width="46" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T5C-Qm-fv7">
+                                <rect key="frame" x="183" y="684" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -85,6 +88,7 @@
                         <outlet property="clickCounterLabel" destination="ZSw-xy-V8C" id="1S1-Vt-W2A"/>
                         <outlet property="difficultyControl" destination="W1X-Ax-Vf2" id="yIP-Er-623"/>
                         <outlet property="gameView" destination="rFZ-AH-hSd" id="NJm-ik-XWo"/>
+                        <outlet property="muteToggle" destination="T5C-Qm-fv7" id="hk1-3n-moX"/>
                         <outlet property="resetButton" destination="kCk-jv-bKS" id="v6e-k1-FjO"/>
                         <outlet property="timerLabel" destination="ZSw-xy-V8C" id="lny-F4-TU7"/>
                         <outlet property="uploadImageButton" destination="TQG-0u-SDp" id="AKM-CC-G0R"/>

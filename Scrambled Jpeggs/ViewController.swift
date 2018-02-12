@@ -36,6 +36,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         scaleToScreen()
         makeBlocks()
         playBackgroundMusic()
+        muteToggle.addTarget(self, action: #selector(toggleMusic), for: UIControlEvents.valueChanged)
         self.ResetButton(Any.self)
     }
     
