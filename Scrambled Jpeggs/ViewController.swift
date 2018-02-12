@@ -46,7 +46,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         clickCount += 1
         clickCounterLabel.text = String.init(format: "%d", clickCount)
     }
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +54,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         difficultyControl.selectedSegmentIndex =  1
         scaleToScreen()
         gameImage = #imageLiteral(resourceName: "square-deer")
-        images = slice(image: gameImage, into:rowSize)
         makeBlocks()
         playBackgroundMusic()
         self.ResetButton(Any.self)
@@ -85,6 +83,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func makeBlocks() {
         blockArray = []
         centersArray = []
+        images = slice(image: gameImage, into:rowSize)
         
         gameViewWidth = gameView.frame.size.width
         blockWidth = gameViewWidth / CGFloat(rowSize)
@@ -220,7 +219,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             rowSize = 4
         }
         visibleBlocks = (rowSize * rowSize) - 1
-        images = slice(image: gameImage, into: rowSize)
         makeBlocks()
         self.ResetButton(Any.self)
     }
@@ -264,7 +262,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         if mediaType.isEqual(to: kUTTypeImage as String) {
             gameImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-            images = slice(image: gameImage, into: rowSize)
             
             clearBlocks()
             makeBlocks()
