@@ -5,69 +5,38 @@ import AVFoundation
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var gameView: UIView!
-
     @IBOutlet weak var clickCounterLabel: UILabel!
-    
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var uploadImageButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet weak var difficultyControl: UISegmentedControl!
     
-    @IBAction func Mute(_ sender: UIButton) {
-        audioPlayer.stop()
-    }
     var gameViewWidth : CGFloat!
     var blockWidth : CGFloat!
     var visibleBlocks : Int!
     var rowSize : Int!
-
     var xCenter : CGFloat!
     var yCenter : CGFloat!
     var finalBlock : MyBlock!
-    
     var blockArray: NSMutableArray = []
     var centersArray: NSMutableArray = []
     var images: [UIImage] = []
     var gameImage : UIImage!
-    
     var empty: CGPoint!
     var clickCount : Int = 0
-    
-    @IBAction func ResetButton(_ sender: Any) {
-        clickCount = 0
-        clickCounterLabel.text = String.init(format: "%d", clickCount)
-        
-        scramble()
-    }
-    
-    @objc func clickAction() {
-        clickCount += 1
-        clickCounterLabel.text = String.init(format: "%d", clickCount)
-    }
+    var audioPlayer = AVAudioPlayer()
+    var newPic: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        gameImage = #imageLiteral(resourceName: "square-deer")
         rowSize = 4
         visibleBlocks = (rowSize * rowSize) - 1
         difficultyControl.selectedSegmentIndex =  1
         scaleToScreen()
-        gameImage = #imageLiteral(resourceName: "square-deer")
         makeBlocks()
         playBackgroundMusic()
         self.ResetButton(Any.self)
-    }
-    
-    var audioPlayer = AVAudioPlayer()
-    
-    func playBackgroundMusic() {
-        let aSound = NSDataAsset(name: "background_music")
-        do {
-            audioPlayer = try AVAudioPlayer(data:(aSound?.data)!, fileTypeHint: "mp3")
-            audioPlayer.numberOfLoops = -1
-            audioPlayer.prepareToPlay()
-            audioPlayer.play()
-        } catch {
-            print("Cannot play the file")
-        }
     }
     
     func scaleToScreen() {
@@ -115,14 +84,58 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         finalBlock = blockArray[visibleBlocks] as! MyBlock
         finalBlock.removeFromSuperview()
         blockArray.removeObject(identicalTo: finalBlock)
-        
     }
     
-    func clearBlocks(){
-        for i in 0..<visibleBlocks {
-            (blockArray[i] as! MyBlock).removeFromSuperview()
+    func slice(image: UIImage, into howMany: Int) -> [UIImage] {
+        
+        let width: CGFloat = image.size.width
+        let height: CGFloat = image.size.height
+        let tileWidth = Int(width / CGFloat(howMany))
+        let tileHeight = Int(height / CGFloat(howMany))
+        let scale = Int(image.scale)
+        var imageSections = [UIImage]()
+        let cgImage = image.cgImage!
+        var adjustedHeight = tileHeight
+        
+        var y = 0
+        for row in 0 ..< howMany {
+            if row == (howMany - 1) {
+                adjustedHeight = Int(height) - y
+            }
+            var adjustedWidth = tileWidth
+            var x = 0
+            for column in 0 ..< howMany {
+                if column == (howMany - 1) {
+                    adjustedWidth = Int(width) - x
+                }
+                let origin = CGPoint(x: x * scale, y: y * scale)
+                let size = CGSize(width: adjustedWidth * scale, height: adjustedHeight * scale)
+                let tileCgImage = cgImage.cropping(to: CGRect(origin: origin, size: size))!
+                imageSections.append(UIImage(cgImage: tileCgImage, scale: image.scale, orientation: image.imageOrientation))
+                x += tileWidth
+            }
+            y += tileHeight
         }
-        blockArray = []
+        return imageSections
+    }
+    
+    func playBackgroundMusic() {
+        let aSound = NSDataAsset(name: "background_music")
+        do {
+            audioPlayer = try AVAudioPlayer(data:(aSound?.data)!, fileTypeHint: "mp3")
+            audioPlayer.numberOfLoops = -1
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+        } catch {
+            print("Cannot play the file")
+        }
+    }
+    
+    @IBAction func ResetButton(_ sender: Any) {
+        clickCount = 0
+        clickCounterLabel.text = String.init(format: "%d", clickCount)
+        
+        scramble()
     }
     
     func scramble() {
@@ -134,6 +147,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             temporaryCentersArray.removeObject(at: randomIndex)
         }
         empty = temporaryCentersArray[0] as! CGPoint
+    }
+    
+    func clearBlocks(){
+        for i in 0..<visibleBlocks {
+            (blockArray[i] as! MyBlock).removeFromSuperview()
+        }
+        blockArray = []
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -164,16 +184,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     gameOverLogic()
                 }
             }
-            
         }
-        
     }
     
-    func gameOverLogic() {
-        for i in 0..<visibleBlocks {
-            (blockArray[i] as! MyBlock).isUserInteractionEnabled = false
-        }
-        displayFinalBlock()
+    @objc func clickAction() {
+        clickCount += 1
+        clickCounterLabel.text = String.init(format: "%d", clickCount)
     }
     
     func checkBlocks() -> Bool {
@@ -181,13 +197,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         for i in 0..<visibleBlocks {
             if (blockArray[i] as! MyBlock).center == (blockArray[i] as! MyBlock).originalCenter {
-               correctBlockCounter += 1
+                correctBlockCounter += 1
             }
         }
         if correctBlockCounter == visibleBlocks {
             return true
         }
         return false
+    }
+    
+    func gameOverLogic() {
+        for i in 0..<visibleBlocks {
+            (blockArray[i] as! MyBlock).isUserInteractionEnabled = false
+        }
+        displayFinalBlock()
     }
     
     func displayFinalBlock() {
@@ -200,7 +223,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         gameView.addSubview(block) 
     }
     
-    @IBOutlet weak var difficultyControl: UISegmentedControl!
+    @IBAction func Mute(_ sender: UIButton) {
+        audioPlayer.stop()
+    }
     
     @IBAction func difficultyTapped(_ sender: Any) {
         clearBlocks()
@@ -219,9 +244,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         makeBlocks()
         self.ResetButton(Any.self)
     }
-    
-    
-    var newPic: Bool?
     
     @IBAction func uploadImageTaped(_ sender: Any) {
 
@@ -283,41 +305,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             self.present(alert, animated: true, completion: nil)
         }
     }
-    
-    func slice(image: UIImage, into howMany: Int) -> [UIImage] {
-
-        let width: CGFloat = image.size.width
-        let height: CGFloat = image.size.height
-        let tileWidth = Int(width / CGFloat(howMany))
-        let tileHeight = Int(height / CGFloat(howMany))
-        let scale = Int(image.scale)
-        var imageSections = [UIImage]()
-        let cgImage = image.cgImage!
-        var adjustedHeight = tileHeight
-        
-        var y = 0
-        for row in 0 ..< howMany {
-            if row == (howMany - 1) {
-                adjustedHeight = Int(height) - y
-            }
-            var adjustedWidth = tileWidth
-            var x = 0
-            for column in 0 ..< howMany {
-                if column == (howMany - 1) {
-                    adjustedWidth = Int(width) - x
-                }
-                let origin = CGPoint(x: x * scale, y: y * scale)
-                let size = CGSize(width: adjustedWidth * scale, height: adjustedHeight * scale)
-                let tileCgImage = cgImage.cropping(to: CGRect(origin: origin, size: size))!
-                imageSections.append(UIImage(cgImage: tileCgImage, scale: image.scale, orientation: image.imageOrientation))
-                x += tileWidth
-            }
-            y += tileHeight
-        }
-        return imageSections
-    }
-    
 }
+
 class MyBlock : UIImageView {
     var originalCenter: CGPoint!
 }
