@@ -157,6 +157,19 @@ class Scrambled_JpeggsTests: XCTestCase {
         XCTAssertTrue(game.audioPlayer.isPlaying)
     }
     
+    // #toggleMusic tests
+    
+    func testMusicTogglesOff() {
+        game.muteToggle.setOn(false, animated: false)
+        game.toggleMusic(switchState: game.muteToggle)
+        XCTAssertFalse(game.audioPlayer.isPlaying)
+    }
+    
+    func testMusicTogglesOn() {
+        game.muteToggle.setOn(true, animated: false)
+        game.toggleMusic(switchState: game.muteToggle)
+        XCTAssertTrue(game.audioPlayer.isPlaying)
+    }
     
     
     
