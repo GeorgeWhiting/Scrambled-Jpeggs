@@ -36,20 +36,46 @@ class Scrambled_JpeggsTests: XCTestCase {
         XCTAssertEqual(game.blockArray.count, 24)
     }
     
-    func testBlock1CenterPoint() {
+    func testFirstBlockCenterPoint() {
         game.makeBlocks()
         XCTAssertEqual((game.blockArray[0] as! MyBlock).center, CGPoint(x: game.blockWidth/2, y: game.blockWidth/2))
     }
     
-    func testBlock2CenterPoint() {
+    func testEndOfRowOneBlock3x3() {
+        game.rowSize = 3
         game.makeBlocks()
-        XCTAssertEqual((game.blockArray[1] as! MyBlock).center, CGPoint(x: (1.5 * game.blockWidth), y: game.blockWidth/2))
+        XCTAssertEqual((game.blockArray[2] as! MyBlock).center, CGPoint(x: (2.5 * game.blockWidth), y: game.blockWidth/2))
     }
     
-    func testBlock6CenterPoint() {
+    func testEndOfRowOneBlock4x4() {
+        game.rowSize = 4
         game.makeBlocks()
-        XCTAssertEqual((game.blockArray[5] as! MyBlock).center, CGPoint(x: (1.5 * game.blockWidth), y: (1.5 * game.blockWidth)))
+        XCTAssertEqual((game.blockArray[3] as! MyBlock).center, CGPoint(x: (3.5 * game.blockWidth), y: game.blockWidth/2))
     }
+    
+//    func testEndOfRowOneBlock5x5() {
+//        game.rowSize = 5
+//        game.makeBlocks()
+//        XCTAssertEqual((game.blockArray[4] as! MyBlock).center, CGPoint(x: (4.5 * game.blockWidth), y: game.blockWidth/2))
+//    }
+    
+    func testLastBlockCenter3x3() {
+        game.rowSize = 3
+        game.makeBlocks()
+        XCTAssertEqual((game.blockArray[7] as! MyBlock).center, CGPoint(x: (1.5 * game.blockWidth), y: (2.5 * game.blockWidth)))
+    }
+    
+    func testLastBlockCenter4x4() {
+        game.rowSize = 4
+        game.makeBlocks()
+        XCTAssertEqual((game.blockArray[14] as! MyBlock).center, CGPoint(x: (2.5 * game.blockWidth), y: (3.5 * game.blockWidth)))
+    }
+    
+//    func testLastBlockCenter5x5() {
+//        game.rowSize = 5
+//        game.makeBlocks()
+//        XCTAssertEqual((game.blockArray[23] as! MyBlock).center, CGPoint(x: (3.5 * game.blockWidth), y: (4.5 * game.blockWidth)))
+//    }
     
     func testCentersArrayContents() {
         game.makeBlocks()
