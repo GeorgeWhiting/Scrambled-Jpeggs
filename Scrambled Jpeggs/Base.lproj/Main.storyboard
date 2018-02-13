@@ -46,7 +46,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="uploadImageTaped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EHT-a3-FDg"/>
+                                    <action selector="uploadImageTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MNs-l8-7tQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kCk-jv-bKS">

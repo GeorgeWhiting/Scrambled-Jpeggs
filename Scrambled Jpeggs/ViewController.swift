@@ -292,8 +292,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.ResetButton(Any.self)
     }
     
-    @IBAction func uploadImageTaped(_ sender: Any) {
-
+    @IBAction func uploadImageTapped(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
