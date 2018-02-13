@@ -34,7 +34,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         gameImage = #imageLiteral(resourceName: "square-deer")
         rowSize = 4
-        visibleBlocks = (rowSize * rowSize) - 1
         difficultyControl.selectedSegmentIndex =  1
         scaleToScreen()
         makeBlocks()
@@ -54,6 +53,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func makeBlocks() {
         blockArray = []
         centersArray = []
+        visibleBlocks = (rowSize * rowSize) - 1
         images = slice(image: gameImage, into:rowSize)
         
         gameViewWidth = gameView.frame.size.width
