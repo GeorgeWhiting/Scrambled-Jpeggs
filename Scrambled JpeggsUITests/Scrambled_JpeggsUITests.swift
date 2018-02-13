@@ -28,6 +28,7 @@ class Scrambled_JpeggsUITests: XCTestCase {
         let environment = app.segmentedControls.element(boundBy: 0);
         app/*@START_MENU_TOKEN@*/.buttons["Easy"]/*[[".segmentedControls.buttons[\"Easy\"]",".buttons[\"Easy\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         XCTAssertTrue(environment.buttons.element(boundBy:0).isSelected, "Easy");
+        
     }
     
     func testMediumButton() {
@@ -39,6 +40,11 @@ class Scrambled_JpeggsUITests: XCTestCase {
         let environment = app.segmentedControls.element(boundBy: 0);
         app.buttons["Hard"].tap()
         XCTAssertTrue(environment.buttons.element(boundBy:2).isSelected, "Hard");
+    }
+    
+    func testMoveCounterStartsAsZero() {
+        let counterLabel = app.staticTexts["0"]
+        XCTAssertEqual("0", counterLabel.label)
     }
     
 }
