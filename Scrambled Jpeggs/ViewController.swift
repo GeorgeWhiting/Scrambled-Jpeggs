@@ -294,22 +294,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBAction func uploadImageTaped(_ sender: Any) {
 
-        let myAlert = UIAlertController(title: "Select image from", message: "", preferredStyle: .actionSheet)
-
-        let cameraRollAction = UIAlertAction(title: "Camera Roll", style: .default) { (action) in
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
-                let imagePicker = UIImagePickerController()
-                imagePicker.delegate = self
-                imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-                imagePicker.mediaTypes = [kUTTypeImage as String]
-                imagePicker.allowsEditing = false
-                self.present(imagePicker, animated: true, completion: nil)
-                self.newPic = false
-            }
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            imagePicker.mediaTypes = [kUTTypeImage as String]
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+            self.newPic = false
         }
-        
-        myAlert.addAction(cameraRollAction)
-        self.present(myAlert, animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
