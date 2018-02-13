@@ -302,7 +302,25 @@ class Scrambled_JpeggsTests: XCTestCase {
         XCTAssertTrue((game.blockArray[1] as! MyBlock).isUserInteractionEnabled)
     }
   
+    // #difficultyTapped tests
     
+    func testEasySetsGridTo3x3() {
+         game.difficultyControl.selectedSegmentIndex =  0
+         game.difficultyTapped((Any).self)
+         XCTAssertEqual(game.rowSize, 3)
+        }
+    
+    func testMediumSetsGridTo4x4() {
+        game.difficultyControl.selectedSegmentIndex =  1
+        game.difficultyTapped((Any).self)
+        XCTAssertEqual(game.rowSize, 4)
+    }
+    
+    func testHardSetsGridTo5x5() {
+        game.difficultyControl.selectedSegmentIndex =  2
+        game.difficultyTapped((Any).self)
+        XCTAssertEqual(game.rowSize, 5)
+    }
     
     
 }
