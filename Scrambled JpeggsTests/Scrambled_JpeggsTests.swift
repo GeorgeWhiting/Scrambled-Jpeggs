@@ -21,6 +21,7 @@ class Scrambled_JpeggsTests: XCTestCase {
     // #makeBlocks tests
     
     func testMakeBlocks4x4() {
+        game.rowSize = 4
         game.makeBlocks()
         XCTAssertEqual(game.blockArray.count, 15)
     }
@@ -115,17 +116,14 @@ class Scrambled_JpeggsTests: XCTestCase {
     }
     
     func testCentersArrayBlock1() {
-        game.makeBlocks()
         XCTAssertEqual((game.centersArray[0] as! CGPoint), CGPoint(x: game.blockWidth/2, y: game.blockWidth/2))
     }
     
     func testOriginalCenter() {
-        game.makeBlocks()
         XCTAssertEqual((game.blockArray[0] as! MyBlock).originalCenter, CGPoint(x: game.blockWidth/2, y: game.blockWidth/2))
     }
     
     func testUserInteractionEnabled() {
-        game.makeBlocks()
         for i in 0..<game.visibleBlocks {
             XCTAssertTrue(((game.blockArray[i]) as! MyBlock).isUserInteractionEnabled)
         }
@@ -171,14 +169,9 @@ class Scrambled_JpeggsTests: XCTestCase {
         XCTAssertTrue(game.audioPlayer.isPlaying)
     }
     
+    // #scramble tests
     
-    
-    
-    
-    
-    
-    func testRandomnize() {
-        game.makeBlocks()
+    func testScrambleChangesAtLeastOneBlockPosition() {
         game.scramble()
         var blockHasChanged = false
         for anyBlock in game.blockArray{
@@ -190,22 +183,19 @@ class Scrambled_JpeggsTests: XCTestCase {
     }
     
     func testEmptyBlock() {
-        game.makeBlocks()
         game.scramble()
-        var emptyBlockExists = false
-        if game.empty != nil {
-            emptyBlockExists = true
-        }
-        
-        XCTAssertTrue(emptyBlockExists)
+        XCTAssertTrue(game.empty != nil)
     }
     
+    // #clearBlocks tests
+    
     func testClearBlocks() {
-        game.makeBlocks()
         game.clearBlocks()
-        
         XCTAssertEqual(game.blockArray.count, 0)
+        XCTAssertEqual(game.gameView.subviews.count, 0)
     }
+    
+    // #checkBlocks tests
     
     func testCheckAllTilesInRightPlace() {
         game.makeBlocks()
@@ -214,34 +204,33 @@ class Scrambled_JpeggsTests: XCTestCase {
     }
     
     func testTilesInWrongPlace() {
-        game.makeBlocks()
         game.scramble()
         game.checkBlocks()
         XCTAssertFalse(game.gameOver)
     }
     
+    // #displayFinalBlocks
+    
     func testFillInLastBlock() {
-        game.makeBlocks()
         game.displayFinalBlock()
-        XCTAssertEqual(game.gameView.subviews.count, 31)
+        XCTAssertEqual(game.gameView.subviews.count, 16)
     }
     
+    // #clickAction tests
+    
     func testClickCounterIncrements() {
-        game.makeBlocks()
         game.scramble()
         game.clickAction()
         XCTAssertEqual(game.clickCount,1)
     }
     
     func testClickCounterIncrementsLabel() {
-        game.makeBlocks()
         game.scramble()
         game.clickAction()
         XCTAssertEqual(game.clickCounterLabel.text,"1")
     }
     
     func testClickCounterResets() {
-        game.makeBlocks()
         game.scramble()
         game.clickAction()
         game.clickAction()
@@ -250,7 +239,6 @@ class Scrambled_JpeggsTests: XCTestCase {
     }
     
     func testClickCounterResetsLabel() {
-        game.makeBlocks()
         game.scramble()
         game.clickAction()
         game.clickAction()
@@ -259,7 +247,6 @@ class Scrambled_JpeggsTests: XCTestCase {
     }
     
     func testClickCounterIncrementsAfterReset() {
-        game.makeBlocks()
         game.scramble()
         game.clickAction()
         game.ResetButton((Any).self)
@@ -269,7 +256,6 @@ class Scrambled_JpeggsTests: XCTestCase {
     }
     
     func testClickCounterIncrementsLabelAfterReset() {
-        game.makeBlocks()
         game.scramble()
         game.clickAction()
         game.ResetButton((Any).self)
@@ -278,14 +264,14 @@ class Scrambled_JpeggsTests: XCTestCase {
         XCTAssertEqual(game.clickCounterLabel.text,"2")
     }
     
+    // #setUserInteractionStateForAllBlocks tests
+    
     func testBlocksCanBeDisabled() {
-        game.makeBlocks()
         game.setUserInteractionStateForAllBlocks(state: false)
         XCTAssertFalse((game.blockArray[1] as! MyBlock).isUserInteractionEnabled)
     }
     
     func testBlocksCanBeEnabled() {
-        game.makeBlocks()
         game.setUserInteractionStateForAllBlocks(state: false)
         game.setUserInteractionStateForAllBlocks(state: true)
         XCTAssertTrue((game.blockArray[1] as! MyBlock).isUserInteractionEnabled)
