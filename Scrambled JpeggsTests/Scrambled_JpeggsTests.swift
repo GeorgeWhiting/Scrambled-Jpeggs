@@ -55,11 +55,12 @@ class Scrambled_JpeggsTests: XCTestCase {
         XCTAssertEqual((game.blockArray[3] as! MyBlock).center, CGPoint(x: (3.5 * game.blockWidth), y: game.blockWidth/2))
     }
     
-//    func testEndOfRowOneBlock5x5() {
-//        game.rowSize = 5
-//        game.makeBlocks()
-//        XCTAssertEqual((game.blockArray[4] as! MyBlock).center, CGPoint(x: (4.5 * game.blockWidth), y: game.blockWidth/2))
-//    }
+    func testEndOfRowOneBlock5x5() {
+        game.rowSize = 5
+        game.makeBlocks()
+        XCTAssertEqual(Float((game.blockArray[4] as! MyBlock).center.x), Float(4.5 * game.blockWidth))
+        XCTAssertEqual(Float((game.blockArray[4] as! MyBlock).center.y), Float(game.blockWidth/2))
+    }
     
     func testLastBlockCenter3x3() {
         game.rowSize = 3
@@ -73,11 +74,12 @@ class Scrambled_JpeggsTests: XCTestCase {
         XCTAssertEqual((game.blockArray[14] as! MyBlock).center, CGPoint(x: (2.5 * game.blockWidth), y: (3.5 * game.blockWidth)))
     }
     
-//    func testLastBlockCenter5x5() {
-//        game.rowSize = 5
-//        game.makeBlocks()
-//        XCTAssertEqual((game.blockArray[23] as! MyBlock).center, CGPoint(x: (3.5 * game.blockWidth), y: (4.5 * game.blockWidth)))
-//    }
+    func testLastBlockCenter5x5() {
+        game.rowSize = 5
+        game.makeBlocks()
+        XCTAssertEqual(Float((game.blockArray[23] as! MyBlock).center.x), Float(3.5 * game.blockWidth))
+        XCTAssertEqual(Float((game.blockArray[23] as! MyBlock).center.y), Float(4.5 * game.blockWidth))
+    }
     
     func testFinalBlock3x3() {
         game.rowSize = 3
@@ -91,11 +93,12 @@ class Scrambled_JpeggsTests: XCTestCase {
         XCTAssertEqual(game.finalBlock.center, CGPoint(x: (3.5 * game.blockWidth), y: (3.5 * game.blockWidth)))
     }
     
-//    func testFinalBlock5x5() {
-//        game.rowSize = 5
-//        game.makeBlocks()
-//        XCTAssertEqual(game.finalBlock.center, CGPoint(x: (4.5 * game.blockWidth), y: (4.5 * game.blockWidth)))
-//    }
+    func testFinalBlock5x5() {
+        game.rowSize = 5
+        game.makeBlocks()
+        XCTAssertEqual(Float(game.finalBlock.center.x), Float(4.5 * game.blockWidth))
+        XCTAssertEqual(Float(game.finalBlock.center.y), Float(4.5 * game.blockWidth))
+    }
     
     func testCentersArrayContents3x3() {
         game.rowSize = 3
@@ -148,6 +151,28 @@ class Scrambled_JpeggsTests: XCTestCase {
         let imageSet = game.slice(image: game.gameImage, into: game.rowSize)
         XCTAssertEqual(imageSet.count, 25)
     }
+    
+    func testImageSplitsIntoCorrectDimensions3x3() {
+        game.rowSize = 3
+        let imageSet = game.slice(image: game.gameImage, into: game.rowSize)
+        XCTAssertEqual(Int(game.gameImage.size.width/3), (Int(imageSet[0].size.width)))
+        XCTAssertEqual(Int(game.gameImage.size.height/3), (Int(imageSet[0].size.height)))
+    }
+    
+    func testImageSplitsIntoCorrectDimensions4x4() {
+        game.rowSize = 4
+        let imageSet = game.slice(image: game.gameImage, into: game.rowSize)
+        XCTAssertEqual(Int(game.gameImage.size.width/4), (Int(imageSet[0].size.width)))
+        XCTAssertEqual(Int(game.gameImage.size.height/4), (Int(imageSet[0].size.height)))
+    }
+    
+    func testImageSplitsIntoCorrectDimensions5x5() {
+        game.rowSize = 5
+        let imageSet = game.slice(image: game.gameImage, into: game.rowSize)
+        XCTAssertEqual(Int(game.gameImage.size.width/5), (Int(imageSet[0].size.width)))
+        XCTAssertEqual(Int(game.gameImage.size.height/5), (Int(imageSet[0].size.height)))
+    }
+
     
     // #playBackgroundMusic tests
     
@@ -276,6 +301,7 @@ class Scrambled_JpeggsTests: XCTestCase {
         game.setUserInteractionStateForAllBlocks(state: true)
         XCTAssertTrue((game.blockArray[1] as! MyBlock).isUserInteractionEnabled)
     }
+  
     
     
     
