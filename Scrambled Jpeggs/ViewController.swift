@@ -27,7 +27,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var empty: CGPoint!
     var clickCount : Int = 0
     var audioPlayer = AVAudioPlayer()
-    var newPic: Bool?
     var gameOver : Bool = false
     
     override func viewDidLoad() {
@@ -300,7 +299,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             imagePicker.mediaTypes = [kUTTypeImage as String]
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
-            self.newPic = false
         }
     }
     
@@ -312,10 +310,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             clearBlocks()
             makeBlocks()
             self.ResetButton(Any.self)
-            
-            if newPic == true {
-                UIImageWriteToSavedPhotosAlbum(gameImage, self, #selector(imageError), nil)
-            }
         }
         self.dismiss(animated: true, completion: nil)
     }
