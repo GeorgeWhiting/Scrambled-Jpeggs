@@ -53,7 +53,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         blockArray = []
         centersArray = []
         visibleBlocks = (rowSize * rowSize) - 1
-        images = slice(image: gameImage, into:rowSize)
         
         gameViewWidth = gameView.frame.size.width
         blockWidth = gameViewWidth / CGFloat(rowSize)
@@ -61,6 +60,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         xCenter = blockWidth / 2
         yCenter = blockWidth / 2
         
+        images = slice(image: gameImage, into:rowSize)
         var picNum = 0
         
         for _ in 0..<rowSize {
@@ -190,15 +190,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             if (Int(distanceBetweenCenters) == Int(blockWidth)) {
                 let temporaryCenter : CGPoint = touchView.center
                 
-                
                 UIView.beginAnimations(nil, context: nil)
                 UIView.setAnimationDuration(0.2)
                 touchView.center = empty
                 UIView.commitAnimations()
+                
                 self.clickAction()
                 empty = temporaryCenter
-                
                 checkBlocks()
+                
                 if gameOver == true {
                     setUserInteractionStateForAllBlocks(state: false)
                     displayFinalBlock()
@@ -306,7 +306,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         if mediaType.isEqual(to: kUTTypeImage as String) {
             gameImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-            
             clearBlocks()
             makeBlocks()
             self.ResetButton(Any.self)
