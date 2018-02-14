@@ -37,9 +37,8 @@ Music credit:
 ### Screenshots
 --------------------------------------------------------------------------------
 
-## ![Easy](https://i.imgur.com/frYveVC.png)
-## ![Medium](https://i.imgur.com/acQb9Tx.png)
-## ![Hard](https://i.imgur.com/5QKPMic.png)
+## ![Easy](https://i.imgur.com/frYveVC.png?2)     ![Medium](https://i.imgur.com/acQb9Tx.png?1)
+![Hard](https://i.imgur.com/5QKPMic.png?1)  ![Complete](https://i.imgur.com/MTwSIIM.png?2)
 
 
 View our end-of-week presentation here:
