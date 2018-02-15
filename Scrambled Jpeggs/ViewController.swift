@@ -244,6 +244,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func showSolutionTapped(_ sender: Any) {
+        self.difficultyControl.isUserInteractionEnabled = false
+        self.resetButton.isUserInteractionEnabled = false
+        self.showSolutionButton.isUserInteractionEnabled = false
+        
         if (gameOver == false) {
             let tempCentersArray : NSMutableArray = []
             (self.finalBlock).center = self.empty
@@ -268,7 +272,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     UIView.animate(withDuration: 2, animations: {
                         self.finalBlock.removeFromSuperview()
                         (self.finalBlock).center = (self.finalBlock).originalCenter
-                    })
+                    }) { _ in
+                        self.difficultyControl.isUserInteractionEnabled = true
+                        self.resetButton.isUserInteractionEnabled = true
+                        self.showSolutionButton.isUserInteractionEnabled = true
+                    }
                 }
             }
         }
