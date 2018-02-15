@@ -173,6 +173,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         for i in 0..<visibleBlocks {
             (blockArray[i] as! MyBlock).removeFromSuperview()
         }
+        finalBlock.removeFromSuperview()
         blockArray = []
     }
     
