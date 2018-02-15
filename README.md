@@ -6,7 +6,7 @@
 
 Scrambled Jpeggs is an iOS sliding puzzle game made as part of our two-week final project at Makers Academy. The high level goal was to apply TDD, Agile and Pair programming to the process of learning a new language - Swift.
 
-During the project, we kept a learning diary to reflect on our learning process. You can find the diary [here]().
+During the project, we kept a developer's diary to reflect on our learning process. You can find the diary [here](https://github.com/GeorgeWhiting/Scrambled-Jpeggs/blob/master/Developer's%20diary.md).
 
 Technologies used:
 - Swift
@@ -37,9 +37,8 @@ Music credit:
 ### Screenshots
 --------------------------------------------------------------------------------
 
-## ![Easy](https://i.imgur.com/frYveVC.png)
-## ![Medium](https://i.imgur.com/acQb9Tx.png)
-## ![Hard](https://i.imgur.com/5QKPMic.png)
+## ![Easy](https://i.imgur.com/frYveVC.png?2)     ![Medium](https://i.imgur.com/acQb9Tx.png?1)
+![Hard](https://i.imgur.com/5QKPMic.png?1)  ![Complete](https://i.imgur.com/MTwSIIM.png?2)
 
 
 View our end-of-week presentation here:
